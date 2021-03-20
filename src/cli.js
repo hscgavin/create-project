@@ -8,9 +8,12 @@ const parseArgumentsIntoOptions = (rawArgs) => {
       "--yes": Boolean,
       "--install": Boolean,
       "-g": "--git",
+      "-y": "--yes",
+      "-i": "--install",
     },
     {
       args: rawArgs.slice(2),
+      permissive: true,
     }
   );
   return {
@@ -58,6 +61,6 @@ const promptForMissingOptions = async (options) => {
 
 export const cli = async (args) => {
   const options = parseArgumentsIntoOptions(args);
-  const finalOption = await promptForMissingOptions(options);
-  console.log(finalOption);
+  const finalOptions = await promptForMissingOptions(options);
+  console.log(finalOptions);
 };
